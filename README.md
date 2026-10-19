@@ -16,6 +16,7 @@
 [![License](https://img.shields.io/github/license/sonariq-source/Sonariq-iOS?style=for-the-badge&labelColor=1a0b1e&color=c084fc)](https://github.com/sonariq-source/Sonariq-iOS/blob/main/LICENSE)
 [![Build](https://img.shields.io/github/actions/workflow/status/sonariq-source/Sonariq-iOS/build.yml?style=for-the-badge&labelColor=1a0b1e&color=22d3ee&label=build)](https://github.com/sonariq-source/Sonariq-iOS/actions)
 [![iOS](https://img.shields.io/badge/iOS-17%2B-000000?style=for-the-badge&labelColor=1a0b1e&logo=ios&logoColor=white)](https://github.com/sonariq-source/Sonariq-iOS/releases)
+[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&labelColor=1a0b1e&logo=ko-fi&logoColor=white)](https://ko-fi.com/sonariqstudio)
 
 <br/>
 
@@ -110,6 +111,18 @@ API keys never live in the repo. Copy `Sonariq/Secrets.xcconfig.example` to `Son
 - Listen Together
 - CarPlay
 - Home-screen widgets
+
+---
+
+<div align="center">
+
+## ☕ Support Sonariq
+
+Sonariq is free and made by an independent developer. If it soundtracks your days, consider [buying a coffee](https://ko-fi.com/sonariqstudio) — every bit goes back into new features, design polish, and keeping the servers running.
+
+<a href="https://ko-fi.com/sonariqstudio" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white" alt="Support Sonariq on Ko-fi" /></a>
+
+</div>
 
 ---
 
