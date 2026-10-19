@@ -186,7 +186,7 @@ enum LRCParser {
     /// Glues timed runs back into words. A word ends at the first whitespace
     /// after it; a run with no space after it is one syllable of a word that
     /// carries on.
-    static func wordsFromRuns(_ runs: [TimedRun]) -> [LyricWord] {
+    private static func wordsFromRuns(_ runs: [TimedRun]) -> [LyricWord] {
         let glue = runs.contains { $0.raw.contains(where: { $0.isWhitespace }) }
         var words: [LyricWord] = []
         var current = ""

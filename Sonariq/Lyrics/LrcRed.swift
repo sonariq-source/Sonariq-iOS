@@ -69,7 +69,7 @@ enum LrcRed {
     /// A miss here is recoverable — the sources behind this one get their
     /// turn — and the wrong words scrolling in time with the right song is
     /// not, so every test is a requirement rather than a score.
-    static func best(_ hits: [Hit], title: String, artist: String, durationMs: Int64) -> Hit? {
+    private static func best(_ hits: [Hit], title: String, artist: String, durationMs: Int64) -> Hit? {
         let wantedTitle = coreOf(title)
         let wantedVersion = versionOf(title)
         let wantedArtists = artistsOf(artist)
