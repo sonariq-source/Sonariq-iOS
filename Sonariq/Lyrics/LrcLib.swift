@@ -18,8 +18,13 @@ enum LrcLib {
         let cleanArtist = clean(artist)
         let seconds = Int(durationMs / 1000)
 
-        guard let synced = await exactMatch(title: cleanTitle, artist: cleanArtist, seconds: seconds)
-            ?? await bestSearchHit(title: cleanTitle, artist: cleanArtist, seconds: seconds) else { return nil }
+        let synced: String?
+        if let exact = await exactMatch(title: cleanTitle, artist: cleanArtist, seconds: seconds) {
+            synced = exact
+        } else {
+            synced = await bestSearchHit(title: cleanTitle, artist: cleanArtist, seconds: seconds)
+        }
+        guard let synced else { return nil }
         let lines = LRCParser.parse(synced)
         return lines.isEmpty ? nil : (lines, synced)
     }

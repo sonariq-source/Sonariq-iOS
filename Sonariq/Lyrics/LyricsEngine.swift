@@ -167,9 +167,10 @@ private enum LyricsCache {
         guard let data = try? Data(contentsOf: url),
               let entry = try? JSONDecoder().decode(Entry.self, from: data),
               Date().timeIntervalSince(entry.fetchedAt) < ttl else { return nil }
-        let lines = entry.format == "ttml" ? TtmlLyrics.parse(entry.text) : LRCParser.parse(entry.text)
+        let format = LyricsFormat(rawValue: entry.format) ?? .lrc
+        let lines = format == .ttml ? TtmlLyrics.parse(entry.text) : LRCParser.parse(entry.text)
         guard !lines.isEmpty else { return nil }
-        return LyricsResult(lines: lines, sourceName: entry.source)
+        return LyricsResult(lines: lines, sourceName: entry.source, rawText: entry.text, format: format)
     }
 
     static func save(_ result: LyricsResult, query: LyricsQuery) {
