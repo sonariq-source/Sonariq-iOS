@@ -28,9 +28,8 @@ struct MiniPlayerView: View {
                 }
                 .padding(.horizontal)
                 .padding(.vertical, 8)
-                .background(Theme.surface)
+                .sonariqGlass()
             }
-            .cornerRadius(12)
             .padding(.horizontal)
         }
     }
@@ -91,6 +90,9 @@ struct NowPlayingView: View {
                             }
                         }
                         .foregroundColor(Theme.text)
+                        .padding(.horizontal, 28)
+                        .padding(.vertical, 14)
+                        .sonariqGlassPill()
 
                         NavigationLink {
                             LyricsView()

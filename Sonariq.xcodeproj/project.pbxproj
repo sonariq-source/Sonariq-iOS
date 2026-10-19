@@ -7,77 +7,118 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1B200000000000000000001 /* SonariqApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000002; };
-		A1B200000000000000000003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000004; };
-		A1B200000000000000000005 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000006; };
-		A1B200000000000000000007 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000008; };
-		A1B200000000000000000009 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000000A; };
-		A1B20000000000000000000B /* PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000000C; };
-		A1B20000000000000000000D /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000000E; };
-		A1B20000000000000000000F /* LyricsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000010; };
-		A1B200000000000000000011 /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000012; };
-		A1B200000000000000000013 /* Equalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000014; };
-		A1B200000000000000000015 /* EqualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000016; };
-		A1B200000000000000000017 /* TtmlLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000018; };
-		A1B200000000000000000019 /* LrcRed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000001A; };
-		A1B20000000000000000001B /* LrcLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000001C; };
-		A1B20000000000000000001D /* LyricsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000001E; };
+		A1B200000000000000000002 /* SonariqApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000001; };
+		A1B200000000000000000004 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000003; };
+		A1B200000000000000000006 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000005; };
+		A1B200000000000000000008 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000007; };
+		A1B20000000000000000000A /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000009; };
+		A1B20000000000000000000C /* PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000000B; };
+		A1B20000000000000000000E /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000000D; };
+		A1B200000000000000000010 /* LyricsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000000F; };
+		A1B200000000000000000012 /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000011; };
+		A1B200000000000000000014 /* Equalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000013; };
+		A1B200000000000000000016 /* EqualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000015; };
+		A1B200000000000000000018 /* TtmlLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000017; };
+		A1B20000000000000000001A /* LrcRed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000019; };
+		A1B20000000000000000001C /* LrcLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000001B; };
+		A1B20000000000000000001E /* LyricsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000001D; };
+		A1B200000000000000000020 /* Glass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000001F; };
+		A1B200000000000000000022 /* MediaLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000021; };
+		A1B200000000000000000024 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000023; };
+		A1B200000000000000000026 /* AlbumDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000025; };
+		A1B200000000000000000028 /* QueueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000027; };
+		A1B20000000000000000002A /* LiveActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000029; };
+		A1B20000000000000000002B /* LiveActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000029; };
+		A1B20000000000000000002D /* SonariqWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000002C; };
+		A1B20000000000000000002F /* NowPlayingLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000002E; };
+		A1B200000000000000000049 /* SonariqWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000034; settings = {ATTRIBUTES = (RemoveHeadersOnCopy,);}; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A1B200000000000000000002 /* SonariqApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonariqApp.swift; sourceTree = "<group>"; };
-		A1B200000000000000000004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		A1B200000000000000000006 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		A1B200000000000000000008 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
-		A1B20000000000000000000A /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
-		A1B20000000000000000000C /* PlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerService.swift; sourceTree = "<group>"; };
-		A1B20000000000000000000E /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
-		A1B200000000000000000010 /* LyricsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsModel.swift; sourceTree = "<group>"; };
-		A1B200000000000000000012 /* LyricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
-		A1B200000000000000000014 /* Equalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equalizer.swift; sourceTree = "<group>"; };
-		A1B200000000000000000016 /* EqualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualizerView.swift; sourceTree = "<group>"; };
-		A1B200000000000000000018 /* TtmlLyrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TtmlLyrics.swift; sourceTree = "<group>"; };
-		A1B20000000000000000001A /* LrcRed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LrcRed.swift; sourceTree = "<group>"; };
-		A1B20000000000000000001C /* LrcLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LrcLib.swift; sourceTree = "<group>"; };
-		A1B20000000000000000001E /* LyricsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsEngine.swift; sourceTree = "<group>"; };
-		A1B20000000000000000001F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1B200000000000000000020 /* Secrets.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig.example; sourceTree = "<group>"; };
-		A1B200000000000000000021 /* Sonariq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonariq.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B200000000000000000001 /* SonariqApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonariqApp.swift; sourceTree = "<group>"; };
+		A1B200000000000000000003 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1B200000000000000000005 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		A1B200000000000000000007 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		A1B200000000000000000009 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		A1B20000000000000000000B /* PlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerService.swift; sourceTree = "<group>"; };
+		A1B20000000000000000000D /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
+		A1B20000000000000000000F /* LyricsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsModel.swift; sourceTree = "<group>"; };
+		A1B200000000000000000011 /* LyricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
+		A1B200000000000000000013 /* Equalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equalizer.swift; sourceTree = "<group>"; };
+		A1B200000000000000000015 /* EqualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualizerView.swift; sourceTree = "<group>"; };
+		A1B200000000000000000017 /* TtmlLyrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TtmlLyrics.swift; sourceTree = "<group>"; };
+		A1B200000000000000000019 /* LrcRed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LrcRed.swift; sourceTree = "<group>"; };
+		A1B20000000000000000001B /* LrcLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LrcLib.swift; sourceTree = "<group>"; };
+		A1B20000000000000000001D /* LyricsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsEngine.swift; sourceTree = "<group>"; };
+		A1B20000000000000000001F /* Glass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glass.swift; sourceTree = "<group>"; };
+		A1B200000000000000000021 /* MediaLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaLibrary.swift; sourceTree = "<group>"; };
+		A1B200000000000000000023 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A1B200000000000000000025 /* AlbumDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailView.swift; sourceTree = "<group>"; };
+		A1B200000000000000000027 /* QueueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueView.swift; sourceTree = "<group>"; };
+		A1B200000000000000000029 /* LiveActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityAttributes.swift; sourceTree = "<group>"; };
+		A1B20000000000000000002C /* SonariqWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonariqWidgetBundle.swift; sourceTree = "<group>"; };
+		A1B20000000000000000002E /* NowPlayingLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingLiveActivity.swift; sourceTree = "<group>"; };
+		A1B200000000000000000030 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1B200000000000000000031 /* Secrets.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig.example; sourceTree = "<group>"; };
+		A1B200000000000000000032 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1B200000000000000000033 /* Sonariq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonariq.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B200000000000000000034 /* SonariqWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SonariqWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXContainerItemProxy section */
+		A1B20000000000000000004C = {isa = PBXContainerItemProxy; containerPortal = A1B20000000000000000004E; proxyType = 1; remoteGlobalIDString = A1B20000000000000000004B; remoteInfo = SonariqWidget; };
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A1B200000000000000000045 /* Embed App Extensions */ = {isa = PBXCopyFilesBuildPhase; buildActionMask = 2147483647; dstPath = ""; dstSubfolderSpec = 13; files = (A1B200000000000000000049,); name = "Embed App Extensions"; runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFrameworksBuildPhase section */
-		A1B20000000000000000002B /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000043 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000047 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A1B200000000000000000022 = {isa = PBXGroup; children = (A1B200000000000000000024, A1B200000000000000000023,); sourceTree = "<group>"; };
-		A1B200000000000000000024 /* Sonariq */ = {isa = PBXGroup; children = (A1B200000000000000000002,A1B200000000000000000004,A1B200000000000000000006,A1B200000000000000000025,A1B200000000000000000026,A1B200000000000000000027,A1B200000000000000000028,A1B200000000000000000029,A1B20000000000000000001F,A1B200000000000000000020,); name = Sonariq; path = Sonariq; sourceTree = "<group>"; };
-		A1B200000000000000000025 /* Models */ = {isa = PBXGroup; children = (A1B200000000000000000008,); name = Models; path = Models; sourceTree = "<group>"; };
-		A1B200000000000000000026 /* Library */ = {isa = PBXGroup; children = (A1B20000000000000000000A,); name = Library; path = Library; sourceTree = "<group>"; };
-		A1B200000000000000000027 /* Player */ = {isa = PBXGroup; children = (A1B20000000000000000000C,A1B20000000000000000000E,); name = Player; path = Player; sourceTree = "<group>"; };
-		A1B200000000000000000028 /* Lyrics */ = {isa = PBXGroup; children = (A1B200000000000000000010,A1B200000000000000000012,A1B200000000000000000018,A1B20000000000000000001A,A1B20000000000000000001C,A1B20000000000000000001E,); name = Lyrics; path = Lyrics; sourceTree = "<group>"; };
-		A1B200000000000000000029 /* Audio */ = {isa = PBXGroup; children = (A1B200000000000000000014,A1B200000000000000000016,); name = Audio; path = Audio; sourceTree = "<group>"; };
-		A1B200000000000000000023 /* Products */ = {isa = PBXGroup; children = (A1B200000000000000000021,); name = Products; sourceTree = "<group>"; };
+		A1B200000000000000000035 = {isa = PBXGroup; children = (A1B200000000000000000037, A1B200000000000000000038, A1B200000000000000000036,); sourceTree = "<group>"; };
+		A1B200000000000000000037 /* Sonariq */ = {isa = PBXGroup; children = (A1B200000000000000000001,A1B200000000000000000003,A1B200000000000000000005,A1B200000000000000000039,A1B20000000000000000003A,A1B20000000000000000003B,A1B20000000000000000003C,A1B20000000000000000003D,A1B20000000000000000003E,A1B20000000000000000003F,A1B200000000000000000040,A1B200000000000000000041,A1B200000000000000000030,A1B200000000000000000031,); name = Sonariq; path = Sonariq; sourceTree = "<group>"; };
+		A1B200000000000000000039 /* Models */ = {isa = PBXGroup; children = (A1B200000000000000000007,); name = Models; path = Models; sourceTree = "<group>"; };
+		A1B20000000000000000003A /* Library */ = {isa = PBXGroup; children = (A1B200000000000000000009,A1B200000000000000000021,); name = Library; path = Library; sourceTree = "<group>"; };
+		A1B20000000000000000003B /* Player */ = {isa = PBXGroup; children = (A1B20000000000000000000B,A1B20000000000000000000D,); name = Player; path = Player; sourceTree = "<group>"; };
+		A1B20000000000000000003C /* Lyrics */ = {isa = PBXGroup; children = (A1B20000000000000000000F,A1B200000000000000000011,A1B200000000000000000017,A1B200000000000000000019,A1B20000000000000000001B,A1B20000000000000000001D,); name = Lyrics; path = Lyrics; sourceTree = "<group>"; };
+		A1B20000000000000000003D /* Audio */ = {isa = PBXGroup; children = (A1B200000000000000000013,A1B200000000000000000015,); name = Audio; path = Audio; sourceTree = "<group>"; };
+		A1B20000000000000000003E /* UI */ = {isa = PBXGroup; children = (A1B20000000000000000001F,); name = UI; path = UI; sourceTree = "<group>"; };
+		A1B20000000000000000003F /* Home */ = {isa = PBXGroup; children = (A1B200000000000000000023,A1B200000000000000000025,); name = Home; path = Home; sourceTree = "<group>"; };
+		A1B200000000000000000040 /* Queue */ = {isa = PBXGroup; children = (A1B200000000000000000027,); name = Queue; path = Queue; sourceTree = "<group>"; };
+		A1B200000000000000000041 /* LiveActivity */ = {isa = PBXGroup; children = (A1B200000000000000000029,); name = LiveActivity; path = LiveActivity; sourceTree = "<group>"; };
+		A1B200000000000000000038 /* SonariqWidget */ = {isa = PBXGroup; children = (A1B20000000000000000002C,A1B20000000000000000002E,A1B200000000000000000032,); name = SonariqWidget; path = SonariqWidget; sourceTree = "<group>"; };
+		A1B200000000000000000036 /* Products */ = {isa = PBXGroup; children = (A1B200000000000000000033, A1B200000000000000000034,); name = Products; sourceTree = "<group>"; };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A1B20000000000000000002D /* Sonariq */ = {isa = PBXNativeTarget; buildConfigurationList = A1B200000000000000000030 /* Build configuration list for PBXNativeTarget "Sonariq" */; buildPhases = (A1B20000000000000000002A /* Sources */, A1B20000000000000000002B /* Frameworks */, A1B20000000000000000002C /* Resources */,); buildRules = (); dependencies = (); name = Sonariq; productName = Sonariq; productReference = A1B200000000000000000021 /* Sonariq.app */; productType = "com.apple.product-type.application"; };
+		A1B20000000000000000004A /* Sonariq */ = {isa = PBXNativeTarget; buildConfigurationList = A1B200000000000000000050 /* Build configuration list for PBXNativeTarget "Sonariq" */; buildPhases = (A1B200000000000000000042 /* Sources */, A1B200000000000000000043 /* Frameworks */, A1B200000000000000000044 /* Resources */, A1B200000000000000000045 /* Embed App Extensions */,); buildRules = (); dependencies = (A1B20000000000000000004D,); name = Sonariq; productName = Sonariq; productReference = A1B200000000000000000033 /* Sonariq.app */; productType = "com.apple.product-type.application"; };
+		A1B20000000000000000004B /* SonariqWidget */ = {isa = PBXNativeTarget; buildConfigurationList = A1B200000000000000000051 /* Build configuration list for PBXNativeTarget "SonariqWidget" */; buildPhases = (A1B200000000000000000046 /* Sources */, A1B200000000000000000047 /* Frameworks */, A1B200000000000000000048 /* Resources */,); buildRules = (); dependencies = (); name = SonariqWidget; productName = SonariqWidget; productReference = A1B200000000000000000034 /* SonariqWidget.appex */; productType = "com.apple.product-type.app-extension"; };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A1B20000000000000000002E /* Project object */ = {isa = PBXProject; attributes = {LastUpgradeCheck = 1600;}; buildConfigurationList = A1B20000000000000000002F /* Build configuration list for PBXProject "Sonariq" */; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en,); mainGroup = A1B200000000000000000022; productRefGroup = A1B200000000000000000023 /* Products */; projectDirPath = ""; projectRoot = ""; targets = (A1B20000000000000000002D /* Sonariq */,); };
+		A1B20000000000000000004E /* Project object */ = {isa = PBXProject; attributes = {LastUpgradeCheck = 1600;}; buildConfigurationList = A1B20000000000000000004F /* Build configuration list for PBXProject "Sonariq" */; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en,); mainGroup = A1B200000000000000000035; productRefGroup = A1B200000000000000000036 /* Products */; projectDirPath = ""; projectRoot = ""; targets = (A1B20000000000000000004A /* Sonariq */, A1B20000000000000000004B /* SonariqWidget */,); };
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A1B20000000000000000002C /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000044 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000048 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A1B20000000000000000002A /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A1B200000000000000000001,A1B200000000000000000003,A1B200000000000000000005,A1B200000000000000000007,A1B200000000000000000009,A1B20000000000000000000B,A1B20000000000000000000D,A1B20000000000000000000F,A1B200000000000000000011,A1B200000000000000000013,A1B200000000000000000015,A1B200000000000000000017,A1B200000000000000000019,A1B20000000000000000001B,A1B20000000000000000001D,); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000042 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A1B200000000000000000002,A1B200000000000000000004,A1B200000000000000000006,A1B200000000000000000008,A1B20000000000000000000A,A1B20000000000000000000C,A1B20000000000000000000E,A1B200000000000000000010,A1B200000000000000000012,A1B200000000000000000014,A1B200000000000000000016,A1B200000000000000000018,A1B20000000000000000001A,A1B20000000000000000001C,A1B20000000000000000001E,A1B200000000000000000020,A1B200000000000000000022,A1B200000000000000000024,A1B200000000000000000026,A1B200000000000000000028,A1B20000000000000000002A,); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000046 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A1B20000000000000000002B,A1B20000000000000000002D,A1B20000000000000000002F,); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A1B20000000000000000004D /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = A1B20000000000000000004B /* SonariqWidget */; targetProxy = A1B20000000000000000004C /* PBXContainerItemProxy */; };
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		A1B200000000000000000031 /* Debug */ = {
+		A1B200000000000000000052 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -107,7 +148,7 @@
 			name = Debug;
 		};
 
-		A1B200000000000000000032 /* Release */ = {
+		A1B200000000000000000053 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -137,7 +178,7 @@
 			name = Release;
 		};
 
-		A1B200000000000000000033 /* Debug */ = {
+		A1B200000000000000000054 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -169,7 +210,7 @@
 			name = Debug;
 		};
 
-		A1B200000000000000000034 /* Release */ = {
+		A1B200000000000000000055 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -201,12 +242,60 @@
 			name = Release;
 		};
 
+		A1B200000000000000000056 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				INFOPLIST_FILE = SonariqWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/Frameworks","@executable_path/../../Frameworks",);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sonariq.app.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1","$(inherited)",);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (DEBUG,"$(inherited)",);
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+
+		A1B200000000000000000057 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				INFOPLIST_FILE = SonariqWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/Frameworks","@executable_path/../../Frameworks",);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sonariq.app.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A1B20000000000000000002F /* Build configuration list for PBXProject "Sonariq" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000031 /* Debug */, A1B200000000000000000032 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-		A1B200000000000000000030 /* Build configuration list for PBXNativeTarget "Sonariq" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000033 /* Debug */, A1B200000000000000000034 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A1B20000000000000000004F /* Build configuration list for PBXProject "Sonariq" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000052 /* Debug */, A1B200000000000000000053 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A1B200000000000000000050 /* Build configuration list for PBXNativeTarget "Sonariq" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000054 /* Debug */, A1B200000000000000000055 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A1B200000000000000000051 /* Build configuration list for PBXNativeTarget "SonariqWidget" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000056 /* Debug */, A1B200000000000000000057 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
 /* End XCConfigurationList section */
 	};
-	rootObject = A1B20000000000000000002E /* Project object */;
+	rootObject = A1B20000000000000000004E /* Project object */;
 }

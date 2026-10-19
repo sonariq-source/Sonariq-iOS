@@ -15,9 +15,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A1B20000000000000000002D"
+               BlueprintIdentifier = "A1B20000000000000000004A"
                BuildableName = "Sonariq.app"
                BlueprintName = "Sonariq"
+               ReferencedContainer = "container:Sonariq.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A1B20000000000000000004B"
+               BuildableName = "SonariqWidget.appex"
+               BlueprintName = "SonariqWidget"
                ReferencedContainer = "container:Sonariq.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

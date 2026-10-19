@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Root view: Library + Equalizer tabs with a mini player on top.
+/// Root view: Home, Library, Queue, Equalizer tabs with a glass mini player.
 struct ContentView: View {
     @EnvironmentObject var player: PlayerService
     @State private var showPlayer = false
@@ -8,8 +8,13 @@ struct ContentView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             TabView {
+                HomeView()
+                    .tabItem { Label("Home", systemImage: "house.fill") }
                 LibraryView()
                     .tabItem { Label("Library", systemImage: "music.note.list") }
+                QueueView()
+                    .tabItem { Label("Queue", systemImage: "list.bullet") }
+                    .badge(player.queue.isEmpty ? nil : player.queue.count)
                 EqualizerView()
                     .tabItem { Label("Equalizer", systemImage: "slider.horizontal.3") }
             }

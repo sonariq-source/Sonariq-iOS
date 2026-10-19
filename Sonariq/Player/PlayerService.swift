@@ -2,11 +2,13 @@ import Foundation
 import AVFoundation
 import MediaPlayer
 import Combine
+import ActivityKit
 
 /// Playback engine: an AVAudioEngine chain (player → 7-band EQ → mixer), so
 /// the equalizer shapes the real output rather than sitting beside it.
-/// Background audio, lock-screen / Control Center integration, and per-track
-/// lyrics fetching (word timings win when a provider truly has them).
+/// Background audio, lock-screen / Control Center integration, Live Activity,
+/// and per-track lyrics fetching (word timings win when a provider truly has
+/// them).
 @MainActor
 final class PlayerService: ObservableObject {
     @Published private(set) var queue: [Song] = []
@@ -28,6 +30,8 @@ final class PlayerService: ObservableObject {
     private var progressTimer: Timer?
     private var cancellables = Set<AnyCancellable>()
     private var lyricsTask: Task<Void, Never>?
+    private var liveActivity: Activity<SonariqActivityAttributes>?
+    private var lastActivityPush: (songId: UInt64, playing: Bool, at: Date)?
 
     var currentSong: Song? {
         guard let i = currentIndex, queue.indices.contains(i) else { return nil }
@@ -109,6 +113,53 @@ final class PlayerService: ObservableObject {
         progress = seconds
         lastKnownProgress = seconds
         updateNowPlayingInfo()
+    }
+
+    // MARK: - Queue editing
+
+    /// Reorders the queue, keeping the current song's position correct.
+    func move(from offsets: IndexSet, to destination: Int) {
+        let currentId = currentSong?.id
+        queue.move(fromOffsets: offsets, to: destination)
+        if let id = currentId {
+            currentIndex = queue.firstIndex(where: { $0.id == id })
+        }
+    }
+
+    /// Removes songs. Removing the playing song moves to whatever is now at
+    /// its position; emptying the queue stops playback.
+    func remove(at offsets: IndexSet) {
+        let removedIds = Set(offsets.map { queue[$0].id })
+        let currentId = currentSong?.id
+        let removingCurrent = currentId.map { removedIds.contains($0) } ?? false
+        queue.remove(atOffsets: offsets)
+        if queue.isEmpty {
+            stop()
+            return
+        }
+        if removingCurrent {
+            playItem(at: min(currentIndex ?? 0, queue.count - 1))
+        } else if let id = currentId {
+            currentIndex = queue.firstIndex(where: { $0.id == id })
+        }
+    }
+
+    func clearQueue() {
+        stop()
+    }
+
+    func stop() {
+        playerNode.stop()
+        lyricsTask?.cancel()
+        queue = []
+        currentIndex = nil
+        isPlaying = false
+        progress = 0
+        lastKnownProgress = 0
+        currentLyrics = []
+        lyricsLoading = false
+        updateNowPlayingInfo()
+        endLiveActivity()
     }
 
     // MARK: - Engine
@@ -246,7 +297,55 @@ final class PlayerService: ObservableObject {
         }
     }
 
+    // MARK: - Live Activity
+
+    /// Pushes the now-playing Live Activity: on track change, play/pause, and
+    /// at most every 5 seconds for progress (the system throttles harder).
+    private func syncLiveActivity() {
+        guard let song = currentSong else {
+            endLiveActivity()
+            return
+        }
+        let now = Date()
+        let state = SonariqActivityAttributes.ContentState(
+            title: song.title,
+            artist: song.artist,
+            isPlaying: isPlaying,
+            progress: progress,
+            duration: song.duration,
+            artworkData: song.artwork?
+                .image(at: CGSize(width: 160, height: 160))?.pngData()
+        )
+        if let activity = liveActivity {
+            let last = lastActivityPush
+            let changed = last?.songId != song.id || last?.playing != isPlaying
+            let stale = last.map { now.timeIntervalSince($0.at) > 5 } ?? true
+            guard changed || stale else { return }
+            lastActivityPush = (song.id, isPlaying, now)
+            Task { await activity.update(ActivityContent(state: state, staleDate: nil)) }
+        } else {
+            guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
+            let attributes = SonariqActivityAttributes(songId: song.id)
+            if let activity = try? Activity.request(
+                attributes: attributes,
+                content: .init(state: state, staleDate: nil),
+                pushType: nil
+            ) {
+                liveActivity = activity
+                lastActivityPush = (song.id, isPlaying, now)
+            }
+        }
+    }
+
+    private func endLiveActivity() {
+        guard let activity = liveActivity else { return }
+        liveActivity = nil
+        lastActivityPush = nil
+        Task { await activity.end(nil, dismissalPolicy: .immediate) }
+    }
+
     private func updateNowPlayingInfo() {
+        syncLiveActivity()
         guard let song = currentSong else {
             MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
             return

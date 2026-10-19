@@ -40,5 +40,7 @@
 	</array>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Sonariq needs access to your music library to play your songs.</string>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
 </dict>
 </plist>
