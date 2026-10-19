@@ -38,8 +38,7 @@ it:
 
 ## License
 
-To be decided — GPL-3.0 is the current recommendation (matches the Sonariq
-family; keeps the project open). See `LICENSE` once added.
+GPL-3.0 — like BitChord and ArchiveTune. See `LICENSE`.
 
 ---
 
