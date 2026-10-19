@@ -89,7 +89,7 @@ enum TtmlLyrics {
                 let role = el.attributes["ttm:role"] ?? el.attributes["role"] ?? ""
                 if skippedRoles.contains(role) { continue }
                 if role == backgroundRole {
-                    collect(el, into: &backing, backing: &backing)
+                    collectBacking(el, into: &backing)
                     continue
                 }
                 let begin = time(el.attributes["begin"])
@@ -98,6 +98,27 @@ enum TtmlLyrics {
                     sink.append(.timed(text: el.textContent, start: b, end: e))
                 } else {
                     collect(el, into: &sink, backing: &backing)
+                }
+            case .text(let t):
+                if !t.isEmpty { sink.append(.text(t)) }
+            }
+        }
+    }
+
+    /// Collects a background-vocal subtree entirely into one sink — inside a
+    /// backing span every leaf is backing, timed or not.
+    private static func collectBacking(_ node: TtmlNode, into sink: inout [Piece]) {
+        for child in node.children {
+            switch child {
+            case .element(let el):
+                let role = el.attributes["ttm:role"] ?? el.attributes["role"] ?? ""
+                if skippedRoles.contains(role) { continue }
+                let begin = time(el.attributes["begin"])
+                let end = time(el.attributes["end"])
+                if let b = begin, let e = end, !hasTimedChild(el) {
+                    sink.append(.timed(text: el.textContent, start: b, end: e))
+                } else {
+                    collectBacking(el, into: &sink)
                 }
             case .text(let t):
                 if !t.isEmpty { sink.append(.text(t)) }
