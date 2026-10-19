@@ -120,7 +120,7 @@ final class PlayerService: ObservableObject {
     /// Reorders the queue, keeping the current song's position correct.
     func move(from offsets: IndexSet, to destination: Int) {
         let currentId = currentSong?.id
-        queue.move(fromOffsets: offsets, to: destination)
+        queue.move(fromOffsets: offsets, toOffset: destination)
         if let id = currentId {
             currentIndex = queue.firstIndex(where: { $0.id == id })
         }

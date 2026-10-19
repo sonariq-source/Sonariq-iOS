@@ -14,7 +14,7 @@ struct ContentView: View {
                     .tabItem { Label("Library", systemImage: "music.note.list") }
                 QueueView()
                     .tabItem { Label("Queue", systemImage: "list.bullet") }
-                    .badge(player.queue.isEmpty ? nil : player.queue.count)
+                    .optionalBadge(player.queue.count)
                 EqualizerView()
                     .tabItem { Label("Equalizer", systemImage: "slider.horizontal.3") }
             }
@@ -29,5 +29,13 @@ struct ContentView: View {
         .sheet(isPresented: $showPlayer) {
             NowPlayingView()
         }
+    }
+}
+
+private extension View {
+    /// Tab badge that hides itself when the count is zero.
+    @ViewBuilder
+    func optionalBadge(_ count: Int) -> some View {
+        if count > 0 { badge(count) } else { self }
     }
 }
