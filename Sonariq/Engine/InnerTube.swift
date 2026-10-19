@@ -44,7 +44,7 @@ enum J {
         guard let thumb = dict(node)?["thumbnail"],
               let renderer = dict(thumb)?["musicThumbnailRenderer"],
               let inner = dict(renderer)?["thumbnail"] else { return nil }
-        return arr(inner["thumbnails"])
+        return arr(dict(inner)?["thumbnails"])
     }
 
     /// Depth-first collection of every renderer object named `name`.
@@ -255,7 +255,8 @@ final class InnerTube {
         }
         let renderers = J.collectRenderers(json, named: "musicResponsiveListItemRenderer")
         var seen = Set<String>()
-        let tracks = renderers.compactMap { Self.parseTrack($0) }.filter { seen.insert($0.videoId).inserted }
+        let tracks: [RemoteTrack] = renderers.compactMap { Self.parseTrack($0)?.track }
+            .filter { seen.insert($0.videoId).inserted }
         return BrowseResult(title: title, subtitle: subtitle, artworkURL: artwork, tracks: tracks)
     }
 
