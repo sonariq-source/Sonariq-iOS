@@ -1,0 +1,204 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1B200000000000000000001 /* SonariqApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000002; };
+		A1B200000000000000000003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000004; };
+		A1B200000000000000000005 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000006; };
+		A1B200000000000000000007 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000008; };
+		A1B200000000000000000009 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000000A; };
+		A1B20000000000000000000B /* PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000000C; };
+		A1B20000000000000000000D /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000000E; };
+		A1B20000000000000000000F /* LyricsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000010; };
+		A1B200000000000000000011 /* LyricsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000012; };
+		A1B200000000000000000013 /* Equalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000014; };
+		A1B200000000000000000015 /* EqualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000016; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A1B200000000000000000002 /* SonariqApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonariqApp.swift; sourceTree = "<group>"; };
+		A1B200000000000000000004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1B200000000000000000006 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		A1B200000000000000000008 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		A1B20000000000000000000A /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		A1B20000000000000000000C /* PlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerService.swift; sourceTree = "<group>"; };
+		A1B20000000000000000000E /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
+		A1B200000000000000000010 /* LyricsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsModel.swift; sourceTree = "<group>"; };
+		A1B200000000000000000012 /* LyricsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsView.swift; sourceTree = "<group>"; };
+		A1B200000000000000000014 /* Equalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equalizer.swift; sourceTree = "<group>"; };
+		A1B200000000000000000016 /* EqualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualizerView.swift; sourceTree = "<group>"; };
+		A1B200000000000000000017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1B200000000000000000018 /* Secrets.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig.example; sourceTree = "<group>"; };
+		A1B200000000000000000019 /* Sonariq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonariq.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1B200000000000000000023 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1B20000000000000000001A = {isa = PBXGroup; children = (A1B20000000000000000001C, A1B20000000000000000001B,); sourceTree = "<group>"; };
+		A1B20000000000000000001C /* Sonariq */ = {isa = PBXGroup; children = (A1B200000000000000000002,A1B200000000000000000004,A1B200000000000000000006,A1B20000000000000000001D,A1B20000000000000000001E,A1B20000000000000000001F,A1B200000000000000000020,A1B200000000000000000021,A1B200000000000000000017,A1B200000000000000000018,); name = Sonariq; path = Sonariq; sourceTree = "<group>"; };
+		A1B20000000000000000001D /* Models */ = {isa = PBXGroup; children = (A1B200000000000000000008,); name = Models; path = Models; sourceTree = "<group>"; };
+		A1B20000000000000000001E /* Library */ = {isa = PBXGroup; children = (A1B20000000000000000000A,); name = Library; path = Library; sourceTree = "<group>"; };
+		A1B20000000000000000001F /* Player */ = {isa = PBXGroup; children = (A1B20000000000000000000C,A1B20000000000000000000E,); name = Player; path = Player; sourceTree = "<group>"; };
+		A1B200000000000000000020 /* Lyrics */ = {isa = PBXGroup; children = (A1B200000000000000000010,A1B200000000000000000012,); name = Lyrics; path = Lyrics; sourceTree = "<group>"; };
+		A1B200000000000000000021 /* Audio */ = {isa = PBXGroup; children = (A1B200000000000000000014,A1B200000000000000000016,); name = Audio; path = Audio; sourceTree = "<group>"; };
+		A1B20000000000000000001B /* Products */ = {isa = PBXGroup; children = (A1B200000000000000000019,); name = Products; sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1B200000000000000000025 /* Sonariq */ = {isa = PBXNativeTarget; buildConfigurationList = A1B200000000000000000028 /* Build configuration list for PBXNativeTarget "Sonariq" */; buildPhases = (A1B200000000000000000022 /* Sources */, A1B200000000000000000023 /* Frameworks */, A1B200000000000000000024 /* Resources */,); buildRules = (); dependencies = (); name = Sonariq; productName = Sonariq; productReference = A1B200000000000000000019 /* Sonariq.app */; productType = "com.apple.product-type.application"; };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1B200000000000000000026 /* Project object */ = {isa = PBXProject; attributes = {LastUpgradeCheck = 1600;}; buildConfigurationList = A1B200000000000000000027 /* Build configuration list for PBXProject "Sonariq" */; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en,); mainGroup = A1B20000000000000000001A; productRefGroup = A1B20000000000000000001B /* Products */; projectDirPath = ""; projectRoot = ""; targets = (A1B200000000000000000025 /* Sonariq */,); };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1B200000000000000000024 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1B200000000000000000022 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A1B200000000000000000001,A1B200000000000000000003,A1B200000000000000000005,A1B200000000000000000007,A1B200000000000000000009,A1B20000000000000000000B,A1B20000000000000000000D,A1B20000000000000000000F,A1B200000000000000000011,A1B200000000000000000013,A1B200000000000000000015,); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A1B200000000000000000029 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+			};
+			name = Debug;
+		};
+
+		A1B20000000000000000002A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+
+		A1B20000000000000000002B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				INFOPLIST_FILE = Sonariq/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/Frameworks",);
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sonariq.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1","$(inherited)",);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (DEBUG,"$(inherited)",);
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+
+		A1B20000000000000000002C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				INFOPLIST_FILE = Sonariq/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/Frameworks",);
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sonariq.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = ("$(inherited)",);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ("$(inherited)",);
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1B200000000000000000027 /* Build configuration list for PBXProject "Sonariq" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000029 /* Debug */, A1B20000000000000000002A /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A1B200000000000000000028 /* Build configuration list for PBXNativeTarget "Sonariq" */ = {isa = XCConfigurationList; buildConfigurations = (A1B20000000000000000002B /* Debug */, A1B20000000000000000002C /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = A1B200000000000000000026 /* Project object */;
+}

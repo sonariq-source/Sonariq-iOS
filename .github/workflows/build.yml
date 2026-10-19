@@ -1,0 +1,32 @@
+name: Build iOS
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          sudo xcode-select -s /Applications/Xcode.app
+          xcodebuild -version
+
+      - name: Prepare secrets (CI)
+        run: |
+          if [ ! -f Sonariq/Secrets.xcconfig ]; then
+            cp Sonariq/Secrets.xcconfig.example Sonariq/Secrets.xcconfig
+          fi
+
+      - name: Build (simulator, unsigned)
+        run: >
+          xcodebuild
+          -project Sonariq.xcodeproj
+          -scheme Sonariq
+          -destination 'generic/platform=iOS Simulator'
+          -derivedDataPath build
+          CODE_SIGNING_ALLOWED=NO
+          build
