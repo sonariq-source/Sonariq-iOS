@@ -38,9 +38,11 @@ Get **Sonariq-unsigned.ipa** from the [latest release](https://github.com/sonari
 ## ✨ Features
 
 ### 🎵 Playback
+- **Search millions of songs** — a dedicated Search tab with filters for songs, albums, artists, and playlists. Tap anything and it plays.
+- **The Sonariq streaming engine** — the same engine as the Android app, ported to iOS: smart stream resolution with cipher handling, URL verification before playback, and downloads cached on-device so the next play is instant (and works offline).
+- **Album, artist & playlist pages** — open any result and play the full track list.
 - **Your library, at home** — Home tab with stats, an albums shelf, and your playlists, all read live from the device.
-- **Album & playlist views** — open any album or playlist and play it straight through.
-- **Queue** — its own tab: jump to any song, reorder, remove, or clear, with a live count badge.
+- **Queue** — its own tab: jump to any song, reorder, remove, or clear, with a live count badge. The next streamed track downloads ahead while you listen.
 - **Background audio** with lock-screen and Control Center controls.
 - **Live Activity** — now playing on the lock screen and the Dynamic Island, with artwork and progress.
 
@@ -107,7 +109,6 @@ API keys never live in the repo. Copy `Sonariq/Secrets.xcconfig.example` to `Son
 
 ## 🗺 Roadmap
 
-- Streaming sources
 - Listen Together
 - CarPlay
 - Home-screen widgets

@@ -48,7 +48,7 @@ struct SearchView: View {
             .navigationTitle("Search")
             .searchable(text: $query, prompt: "Songs, albums, artists")
             .onSubmit(of: .search) { runSearch() }
-            .onChange(of: filter) { runSearch() }
+            .onChange(of: filter) { _, _ in runSearch() }
         }
     }
 
