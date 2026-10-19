@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Root view: Home, Library, Queue, Equalizer tabs with a glass mini player.
+/// Root view: Home, Search, Library, Queue, Equalizer tabs with a glass mini player.
 struct ContentView: View {
     @EnvironmentObject var player: PlayerService
     @State private var showPlayer = false
@@ -10,6 +10,8 @@ struct ContentView: View {
             TabView {
                 HomeView()
                     .tabItem { Label("Home", systemImage: "house.fill") }
+                SearchView()
+                    .tabItem { Label("Search", systemImage: "magnifyingglass") }
                 LibraryView()
                     .tabItem { Label("Library", systemImage: "music.note.list") }
                 QueueView()

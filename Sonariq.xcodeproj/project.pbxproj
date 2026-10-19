@@ -31,7 +31,13 @@
 		A1B20000000000000000002B /* LiveActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000029; };
 		A1B20000000000000000002D /* SonariqWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000002C; };
 		A1B20000000000000000002F /* NowPlayingLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000002E; };
-		A1B200000000000000000049 /* SonariqWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000034; settings = {ATTRIBUTES = (RemoveHeadersOnCopy,);}; };
+		A1B200000000000000000031 /* InnerTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000030; };
+		A1B200000000000000000033 /* StreamResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000032; };
+		A1B200000000000000000035 /* TrackCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000034; };
+		A1B200000000000000000037 /* RemoteArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000036; };
+		A1B200000000000000000039 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000038; };
+		A1B20000000000000000003B /* BrowseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B20000000000000000003A; };
+		A1B200000000000000000057 /* SonariqWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A1B200000000000000000040; settings = {ATTRIBUTES = (RemoveHeadersOnCopy,);}; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,67 +64,75 @@
 		A1B200000000000000000029 /* LiveActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityAttributes.swift; sourceTree = "<group>"; };
 		A1B20000000000000000002C /* SonariqWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonariqWidgetBundle.swift; sourceTree = "<group>"; };
 		A1B20000000000000000002E /* NowPlayingLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingLiveActivity.swift; sourceTree = "<group>"; };
-		A1B200000000000000000030 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1B200000000000000000031 /* Secrets.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig.example; sourceTree = "<group>"; };
-		A1B200000000000000000032 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1B200000000000000000033 /* Sonariq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonariq.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1B200000000000000000034 /* SonariqWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SonariqWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B200000000000000000030 /* InnerTube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerTube.swift; sourceTree = "<group>"; };
+		A1B200000000000000000032 /* StreamResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamResolver.swift; sourceTree = "<group>"; };
+		A1B200000000000000000034 /* TrackCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCache.swift; sourceTree = "<group>"; };
+		A1B200000000000000000036 /* RemoteArtwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteArtwork.swift; sourceTree = "<group>"; };
+		A1B200000000000000000038 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		A1B20000000000000000003A /* BrowseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseDetailView.swift; sourceTree = "<group>"; };
+		A1B20000000000000000003C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1B20000000000000000003D /* Secrets.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig.example; sourceTree = "<group>"; };
+		A1B20000000000000000003E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1B20000000000000000003F /* Sonariq.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonariq.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B200000000000000000040 /* SonariqWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SonariqWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXContainerItemProxy section */
-		A1B20000000000000000004C = {isa = PBXContainerItemProxy; containerPortal = A1B20000000000000000004E; proxyType = 1; remoteGlobalIDString = A1B20000000000000000004B; remoteInfo = SonariqWidget; };
+		A1B20000000000000000005A = {isa = PBXContainerItemProxy; containerPortal = A1B20000000000000000005C; proxyType = 1; remoteGlobalIDString = A1B200000000000000000059; remoteInfo = SonariqWidget; };
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A1B200000000000000000045 /* Embed App Extensions */ = {isa = PBXCopyFilesBuildPhase; buildActionMask = 2147483647; dstPath = ""; dstSubfolderSpec = 13; files = (A1B200000000000000000049,); name = "Embed App Extensions"; runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000053 /* Embed App Extensions */ = {isa = PBXCopyFilesBuildPhase; buildActionMask = 2147483647; dstPath = ""; dstSubfolderSpec = 13; files = (A1B200000000000000000057,); name = "Embed App Extensions"; runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A1B200000000000000000043 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
-		A1B200000000000000000047 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000051 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000055 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A1B200000000000000000035 = {isa = PBXGroup; children = (A1B200000000000000000037, A1B200000000000000000038, A1B200000000000000000036,); sourceTree = "<group>"; };
-		A1B200000000000000000037 /* Sonariq */ = {isa = PBXGroup; children = (A1B200000000000000000001,A1B200000000000000000003,A1B200000000000000000005,A1B200000000000000000039,A1B20000000000000000003A,A1B20000000000000000003B,A1B20000000000000000003C,A1B20000000000000000003D,A1B20000000000000000003E,A1B20000000000000000003F,A1B200000000000000000040,A1B200000000000000000041,A1B200000000000000000030,A1B200000000000000000031,); name = Sonariq; path = Sonariq; sourceTree = "<group>"; };
-		A1B200000000000000000039 /* Models */ = {isa = PBXGroup; children = (A1B200000000000000000007,); name = Models; path = Models; sourceTree = "<group>"; };
-		A1B20000000000000000003A /* Library */ = {isa = PBXGroup; children = (A1B200000000000000000009,A1B200000000000000000021,); name = Library; path = Library; sourceTree = "<group>"; };
-		A1B20000000000000000003B /* Player */ = {isa = PBXGroup; children = (A1B20000000000000000000B,A1B20000000000000000000D,); name = Player; path = Player; sourceTree = "<group>"; };
-		A1B20000000000000000003C /* Lyrics */ = {isa = PBXGroup; children = (A1B20000000000000000000F,A1B200000000000000000011,A1B200000000000000000017,A1B200000000000000000019,A1B20000000000000000001B,A1B20000000000000000001D,); name = Lyrics; path = Lyrics; sourceTree = "<group>"; };
-		A1B20000000000000000003D /* Audio */ = {isa = PBXGroup; children = (A1B200000000000000000013,A1B200000000000000000015,); name = Audio; path = Audio; sourceTree = "<group>"; };
-		A1B20000000000000000003E /* UI */ = {isa = PBXGroup; children = (A1B20000000000000000001F,); name = UI; path = UI; sourceTree = "<group>"; };
-		A1B20000000000000000003F /* Home */ = {isa = PBXGroup; children = (A1B200000000000000000023,A1B200000000000000000025,); name = Home; path = Home; sourceTree = "<group>"; };
-		A1B200000000000000000040 /* Queue */ = {isa = PBXGroup; children = (A1B200000000000000000027,); name = Queue; path = Queue; sourceTree = "<group>"; };
-		A1B200000000000000000041 /* LiveActivity */ = {isa = PBXGroup; children = (A1B200000000000000000029,); name = LiveActivity; path = LiveActivity; sourceTree = "<group>"; };
-		A1B200000000000000000038 /* SonariqWidget */ = {isa = PBXGroup; children = (A1B20000000000000000002C,A1B20000000000000000002E,A1B200000000000000000032,); name = SonariqWidget; path = SonariqWidget; sourceTree = "<group>"; };
-		A1B200000000000000000036 /* Products */ = {isa = PBXGroup; children = (A1B200000000000000000033, A1B200000000000000000034,); name = Products; sourceTree = "<group>"; };
+		A1B200000000000000000041 = {isa = PBXGroup; children = (A1B200000000000000000043, A1B200000000000000000044, A1B200000000000000000042,); sourceTree = "<group>"; };
+		A1B200000000000000000043 /* Sonariq */ = {isa = PBXGroup; children = (A1B200000000000000000001,A1B200000000000000000003,A1B200000000000000000005,A1B200000000000000000045,A1B200000000000000000046,A1B200000000000000000047,A1B200000000000000000048,A1B200000000000000000049,A1B20000000000000000004A,A1B20000000000000000004B,A1B20000000000000000004C,A1B20000000000000000004D,A1B20000000000000000004E,A1B20000000000000000004F,A1B20000000000000000003C,A1B20000000000000000003D,); name = Sonariq; path = Sonariq; sourceTree = "<group>"; };
+		A1B200000000000000000045 /* Models */ = {isa = PBXGroup; children = (A1B200000000000000000007,); name = Models; path = Models; sourceTree = "<group>"; };
+		A1B200000000000000000046 /* Library */ = {isa = PBXGroup; children = (A1B200000000000000000009,A1B200000000000000000021,); name = Library; path = Library; sourceTree = "<group>"; };
+		A1B200000000000000000047 /* Player */ = {isa = PBXGroup; children = (A1B20000000000000000000B,A1B20000000000000000000D,); name = Player; path = Player; sourceTree = "<group>"; };
+		A1B200000000000000000048 /* Lyrics */ = {isa = PBXGroup; children = (A1B20000000000000000000F,A1B200000000000000000011,A1B200000000000000000017,A1B200000000000000000019,A1B20000000000000000001B,A1B20000000000000000001D,); name = Lyrics; path = Lyrics; sourceTree = "<group>"; };
+		A1B200000000000000000049 /* Audio */ = {isa = PBXGroup; children = (A1B200000000000000000013,A1B200000000000000000015,); name = Audio; path = Audio; sourceTree = "<group>"; };
+		A1B20000000000000000004A /* UI */ = {isa = PBXGroup; children = (A1B20000000000000000001F,A1B200000000000000000036,); name = UI; path = UI; sourceTree = "<group>"; };
+		A1B20000000000000000004B /* Home */ = {isa = PBXGroup; children = (A1B200000000000000000023,A1B200000000000000000025,); name = Home; path = Home; sourceTree = "<group>"; };
+		A1B20000000000000000004C /* Queue */ = {isa = PBXGroup; children = (A1B200000000000000000027,); name = Queue; path = Queue; sourceTree = "<group>"; };
+		A1B20000000000000000004D /* LiveActivity */ = {isa = PBXGroup; children = (A1B200000000000000000029,); name = LiveActivity; path = LiveActivity; sourceTree = "<group>"; };
+		A1B20000000000000000004E /* Engine */ = {isa = PBXGroup; children = (A1B200000000000000000030,A1B200000000000000000032,A1B200000000000000000034,); name = Engine; path = Engine; sourceTree = "<group>"; };
+		A1B20000000000000000004F /* Search */ = {isa = PBXGroup; children = (A1B200000000000000000038,A1B20000000000000000003A,); name = Search; path = Search; sourceTree = "<group>"; };
+		A1B200000000000000000044 /* SonariqWidget */ = {isa = PBXGroup; children = (A1B20000000000000000002C,A1B20000000000000000002E,A1B20000000000000000003E,); name = SonariqWidget; path = SonariqWidget; sourceTree = "<group>"; };
+		A1B200000000000000000042 /* Products */ = {isa = PBXGroup; children = (A1B20000000000000000003F, A1B200000000000000000040,); name = Products; sourceTree = "<group>"; };
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A1B20000000000000000004A /* Sonariq */ = {isa = PBXNativeTarget; buildConfigurationList = A1B200000000000000000050 /* Build configuration list for PBXNativeTarget "Sonariq" */; buildPhases = (A1B200000000000000000042 /* Sources */, A1B200000000000000000043 /* Frameworks */, A1B200000000000000000044 /* Resources */, A1B200000000000000000045 /* Embed App Extensions */,); buildRules = (); dependencies = (A1B20000000000000000004D,); name = Sonariq; productName = Sonariq; productReference = A1B200000000000000000033 /* Sonariq.app */; productType = "com.apple.product-type.application"; };
-		A1B20000000000000000004B /* SonariqWidget */ = {isa = PBXNativeTarget; buildConfigurationList = A1B200000000000000000051 /* Build configuration list for PBXNativeTarget "SonariqWidget" */; buildPhases = (A1B200000000000000000046 /* Sources */, A1B200000000000000000047 /* Frameworks */, A1B200000000000000000048 /* Resources */,); buildRules = (); dependencies = (); name = SonariqWidget; productName = SonariqWidget; productReference = A1B200000000000000000034 /* SonariqWidget.appex */; productType = "com.apple.product-type.app-extension"; };
+		A1B200000000000000000058 /* Sonariq */ = {isa = PBXNativeTarget; buildConfigurationList = A1B20000000000000000005E /* Build configuration list for PBXNativeTarget "Sonariq" */; buildPhases = (A1B200000000000000000050 /* Sources */, A1B200000000000000000051 /* Frameworks */, A1B200000000000000000052 /* Resources */, A1B200000000000000000053 /* Embed App Extensions */,); buildRules = (); dependencies = (A1B20000000000000000005B,); name = Sonariq; productName = Sonariq; productReference = A1B20000000000000000003F /* Sonariq.app */; productType = "com.apple.product-type.application"; };
+		A1B200000000000000000059 /* SonariqWidget */ = {isa = PBXNativeTarget; buildConfigurationList = A1B20000000000000000005F /* Build configuration list for PBXNativeTarget "SonariqWidget" */; buildPhases = (A1B200000000000000000054 /* Sources */, A1B200000000000000000055 /* Frameworks */, A1B200000000000000000056 /* Resources */,); buildRules = (); dependencies = (); name = SonariqWidget; productName = SonariqWidget; productReference = A1B200000000000000000040 /* SonariqWidget.appex */; productType = "com.apple.product-type.app-extension"; };
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A1B20000000000000000004E /* Project object */ = {isa = PBXProject; attributes = {LastUpgradeCheck = 1600;}; buildConfigurationList = A1B20000000000000000004F /* Build configuration list for PBXProject "Sonariq" */; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en,); mainGroup = A1B200000000000000000035; productRefGroup = A1B200000000000000000036 /* Products */; projectDirPath = ""; projectRoot = ""; targets = (A1B20000000000000000004A /* Sonariq */, A1B20000000000000000004B /* SonariqWidget */,); };
+		A1B20000000000000000005C /* Project object */ = {isa = PBXProject; attributes = {LastUpgradeCheck = 1600;}; buildConfigurationList = A1B20000000000000000005D /* Build configuration list for PBXProject "Sonariq" */; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en,); mainGroup = A1B200000000000000000041; productRefGroup = A1B200000000000000000042 /* Products */; projectDirPath = ""; projectRoot = ""; targets = (A1B200000000000000000058 /* Sonariq */, A1B200000000000000000059 /* SonariqWidget */,); };
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A1B200000000000000000044 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
-		A1B200000000000000000048 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000052 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000056 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A1B200000000000000000042 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A1B200000000000000000002,A1B200000000000000000004,A1B200000000000000000006,A1B200000000000000000008,A1B20000000000000000000A,A1B20000000000000000000C,A1B20000000000000000000E,A1B200000000000000000010,A1B200000000000000000012,A1B200000000000000000014,A1B200000000000000000016,A1B200000000000000000018,A1B20000000000000000001A,A1B20000000000000000001C,A1B20000000000000000001E,A1B200000000000000000020,A1B200000000000000000022,A1B200000000000000000024,A1B200000000000000000026,A1B200000000000000000028,A1B20000000000000000002A,); runOnlyForDeploymentPostprocessing = 0; };
-		A1B200000000000000000046 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A1B20000000000000000002B,A1B20000000000000000002D,A1B20000000000000000002F,); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000050 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A1B200000000000000000002,A1B200000000000000000004,A1B200000000000000000006,A1B200000000000000000008,A1B20000000000000000000A,A1B20000000000000000000C,A1B20000000000000000000E,A1B200000000000000000010,A1B200000000000000000012,A1B200000000000000000014,A1B200000000000000000016,A1B200000000000000000018,A1B20000000000000000001A,A1B20000000000000000001C,A1B20000000000000000001E,A1B200000000000000000020,A1B200000000000000000022,A1B200000000000000000024,A1B200000000000000000026,A1B200000000000000000028,A1B20000000000000000002A,A1B200000000000000000031,A1B200000000000000000033,A1B200000000000000000035,A1B200000000000000000037,A1B200000000000000000039,A1B20000000000000000003B,); runOnlyForDeploymentPostprocessing = 0; };
+		A1B200000000000000000054 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A1B20000000000000000002B,A1B20000000000000000002D,A1B20000000000000000002F,); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A1B20000000000000000004D /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = A1B20000000000000000004B /* SonariqWidget */; targetProxy = A1B20000000000000000004C /* PBXContainerItemProxy */; };
+		A1B20000000000000000005B /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = A1B200000000000000000059 /* SonariqWidget */; targetProxy = A1B20000000000000000005A /* PBXContainerItemProxy */; };
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		A1B200000000000000000052 /* Debug */ = {
+		A1B200000000000000000060 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -148,7 +162,7 @@
 			name = Debug;
 		};
 
-		A1B200000000000000000053 /* Release */ = {
+		A1B200000000000000000061 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -178,7 +192,7 @@
 			name = Release;
 		};
 
-		A1B200000000000000000054 /* Debug */ = {
+		A1B200000000000000000062 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -210,7 +224,7 @@
 			name = Debug;
 		};
 
-		A1B200000000000000000055 /* Release */ = {
+		A1B200000000000000000063 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -242,7 +256,7 @@
 			name = Release;
 		};
 
-		A1B200000000000000000056 /* Debug */ = {
+		A1B200000000000000000064 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -266,7 +280,7 @@
 			name = Debug;
 		};
 
-		A1B200000000000000000057 /* Release */ = {
+		A1B200000000000000000065 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -292,10 +306,10 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A1B20000000000000000004F /* Build configuration list for PBXProject "Sonariq" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000052 /* Debug */, A1B200000000000000000053 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-		A1B200000000000000000050 /* Build configuration list for PBXNativeTarget "Sonariq" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000054 /* Debug */, A1B200000000000000000055 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-		A1B200000000000000000051 /* Build configuration list for PBXNativeTarget "SonariqWidget" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000056 /* Debug */, A1B200000000000000000057 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A1B20000000000000000005D /* Build configuration list for PBXProject "Sonariq" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000060 /* Debug */, A1B200000000000000000061 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A1B20000000000000000005E /* Build configuration list for PBXNativeTarget "Sonariq" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000062 /* Debug */, A1B200000000000000000063 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A1B20000000000000000005F /* Build configuration list for PBXNativeTarget "SonariqWidget" */ = {isa = XCConfigurationList; buildConfigurations = (A1B200000000000000000064 /* Debug */, A1B200000000000000000065 /* Release */,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
 /* End XCConfigurationList section */
 	};
-	rootObject = A1B20000000000000000004E /* Project object */;
+	rootObject = A1B20000000000000000005C /* Project object */;
 }

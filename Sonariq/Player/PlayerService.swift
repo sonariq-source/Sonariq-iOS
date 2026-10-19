@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import AVFoundation
 import MediaPlayer
 import Combine
@@ -14,6 +15,8 @@ final class PlayerService: ObservableObject {
     @Published private(set) var queue: [Song] = []
     @Published private(set) var currentIndex: Int?
     @Published private(set) var isPlaying = false
+    @Published private(set) var buffering = false
+    @Published private(set) var bufferingError: String?
     @Published var progress: Double = 0
     @Published private(set) var currentLyrics: [LyricsLine] = []
     @Published private(set) var lyricsLoading = false
@@ -32,6 +35,10 @@ final class PlayerService: ObservableObject {
     private var lyricsTask: Task<Void, Never>?
     private var liveActivity: Activity<SonariqActivityAttributes>?
     private var lastActivityPush: (songId: UInt64, playing: Bool, at: Date)?
+    private var lastArtworkSongId: UInt64?
+    private var remoteArtwork: MPMediaItemArtwork?
+    private var remoteArtworkImage: UIImage?
+    private var fetchingArtworkFor: UInt64?
 
     var currentSong: Song? {
         guard let i = currentIndex, queue.indices.contains(i) else { return nil }
@@ -154,6 +161,8 @@ final class PlayerService: ObservableObject {
         queue = []
         currentIndex = nil
         isPlaying = false
+        buffering = false
+        bufferingError = nil
         progress = 0
         lastKnownProgress = 0
         currentLyrics = []
@@ -162,19 +171,87 @@ final class PlayerService: ObservableObject {
         endLiveActivity()
     }
 
+    /// Plays search/browse results: converts to Songs and starts the queue.
+    func playRemoteTracks(_ tracks: [RemoteTrack], startingAt index: Int) {
+        play(songs: tracks.map(Song.init(remote:)), startingAt: index)
+    }
+
     // MARK: - Engine
 
     private func playItem(at index: Int, skipCount: Int = 0) {
-        guard queue.indices.contains(index), let url = queue[index].assetURL else { return }
-        guard let file = try? AVAudioFile(forReading: url) else {
+        guard queue.indices.contains(index) else { return }
+        let song = queue[index]
+        if song.isRemote {
+            playRemote(song, at: index, skipCount: skipCount)
+        } else {
+            playLocal(song, at: index, skipCount: skipCount)
+        }
+    }
+
+    private func playLocal(_ song: Song, at index: Int, skipCount: Int) {
+        guard let url = song.assetURL,
+              let file = try? AVAudioFile(forReading: url) else {
             // Unreadable (e.g. protected) — skip it rather than stalling the queue.
             guard skipCount < queue.count else { return }
             playItem(at: (index + 1) % queue.count, skipCount: skipCount + 1)
             return
         }
+        startFile(file, song: song, at: index)
+    }
+
+    /// Remote tracks resolve to a cached file first: the engine downloads the
+    /// stream (with the client's exact headers), verifies it, then plays it
+    /// through the same EQ pipeline as local files.
+    private func playRemote(_ song: Song, at index: Int, skipCount: Int) {
         currentIndex = index
         progress = 0
         lastKnownProgress = 0
+        buffering = true
+        bufferingError = nil
+        isPlaying = false
+        updateNowPlayingInfo()
+        loadLyrics(for: song)
+        Task {
+            do {
+                let url = try await TrackCache.shared.localFile(for: song)
+                guard self.stillOn(song, at: index),
+                      let file = try? AVAudioFile(forReading: url) else {
+                    // Moved on, or the download wasn't audio after all.
+                    if self.stillOn(song, at: index) { self.skipAhead(from: index, skipCount: skipCount) }
+                    return
+                }
+                guard self.stillOn(song, at: index) else { return }
+                self.startFile(file, song: song, at: index)
+            } catch {
+                guard self.stillOn(song, at: index) else { return }
+                self.buffering = false
+                self.bufferingError = (error as? LocalizedError)?.errorDescription
+                    ?? "Couldn't play this track."
+                self.skipAhead(from: index, skipCount: skipCount)
+            }
+        }
+    }
+
+    /// True when the queue hasn't moved past this song while we were busy.
+    private func stillOn(_ song: Song, at index: Int) -> Bool {
+        currentIndex == index && queue.indices.contains(index) && queue[index].id == song.id
+    }
+
+    private func skipAhead(from index: Int, skipCount: Int) {
+        guard skipCount < queue.count else {
+            buffering = false
+            return
+        }
+        playItem(at: (index + 1) % queue.count, skipCount: skipCount + 1)
+    }
+
+    /// Starts an already-local audio file through the EQ pipeline.
+    private func startFile(_ file: AVAudioFile, song: Song, at index: Int) {
+        currentIndex = index
+        progress = 0
+        lastKnownProgress = 0
+        buffering = false
+        bufferingError = nil
         audioFile = file
         sampleRate = file.processingFormat.sampleRate
         do {
@@ -190,7 +267,18 @@ final class PlayerService: ObservableObject {
         scheduleSegment(fromFrame: 0, autoplay: true)
         isPlaying = true
         updateNowPlayingInfo()
-        loadLyrics(for: queue[index])
+        loadLyrics(for: song)
+        prefetchNext(after: index)
+    }
+
+    /// Read-ahead: while this track plays, the next remote track downloads so
+    /// it's instant when the queue gets there.
+    private func prefetchNext(after index: Int) {
+        guard !queue.isEmpty else { return }
+        let next = (index + 1) % queue.count
+        guard queue.indices.contains(next), queue[next].isRemote else { return }
+        let song = queue[next]
+        Task { await TrackCache.shared.prefetch(song) }
     }
 
     private func scheduleSegment(fromFrame frame: AVAudioFramePosition, autoplay: Bool) {
@@ -307,14 +395,15 @@ final class PlayerService: ObservableObject {
             return
         }
         let now = Date()
+        let localImage = song.artwork?.image(at: CGSize(width: 160, height: 160))
+        let image = localImage ?? (song.id == lastArtworkSongId ? remoteArtworkImage : nil)
         let state = SonariqActivityAttributes.ContentState(
             title: song.title,
             artist: song.artist,
             isPlaying: isPlaying,
             progress: progress,
             duration: song.duration,
-            artworkData: song.artwork?
-                .image(at: CGSize(width: 160, height: 160))?.pngData()
+            artworkData: image?.pngData()
         )
         if let activity = liveActivity {
             let last = lastActivityPush
@@ -360,7 +449,32 @@ final class PlayerService: ObservableObject {
         ]
         if let artwork = song.artwork {
             info[MPMediaItemPropertyArtwork] = artwork
+        } else if song.id == lastArtworkSongId, let artwork = remoteArtwork {
+            info[MPMediaItemPropertyArtwork] = artwork
+        } else if let url = song.remoteArtworkURL {
+            fetchRemoteArtwork(url, for: song)
         }
         MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+    }
+
+    /// Downloads a streamed track's artwork once per song, for the lock
+    /// screen and Live Activity.
+    private func fetchRemoteArtwork(_ url: URL, for song: Song) {
+        guard fetchingArtworkFor != song.id else { return }
+        fetchingArtworkFor = song.id
+        Task {
+            defer { Task { @MainActor in
+                if self.fetchingArtworkFor == song.id { self.fetchingArtworkFor = nil }
+            } }
+            guard let (data, _) = try? await URLSession.shared.data(from: url),
+                  let image = UIImage(data: data) else { return }
+            let artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in image }
+            await MainActor.run {
+                self.lastArtworkSongId = song.id
+                self.remoteArtwork = artwork
+                self.remoteArtworkImage = image
+                if self.currentSong?.id == song.id { self.updateNowPlayingInfo() }
+            }
+        }
     }
 }

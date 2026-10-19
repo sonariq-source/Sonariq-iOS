@@ -45,9 +45,15 @@ SWIFT = [
     ("LiveActivityAttributes.swift", "LiveActivity", [APP, WIDGET]),
     ("SonariqWidgetBundle.swift", "SonariqWidget", [WIDGET]),
     ("NowPlayingLiveActivity.swift", "SonariqWidget", [WIDGET]),
+    ("InnerTube.swift", "Engine", [APP]),
+    ("StreamResolver.swift", "Engine", [APP]),
+    ("TrackCache.swift", "Engine", [APP]),
+    ("RemoteArtwork.swift", "UI", [APP]),
+    ("SearchView.swift", "Search", [APP]),
+    ("BrowseDetailView.swift", "Search", [APP]),
 ]
 SUBGROUPS = ["Models", "Library", "Player", "Lyrics", "Audio", "UI", "Home",
-             "Queue", "LiveActivity"]
+             "Queue", "LiveActivity", "Engine", "Search"]
 
 # Build files per (file index, target); file refs shared.
 bf = {}

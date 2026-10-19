@@ -90,6 +90,8 @@ struct ArtworkThumb: View {
             if let art = song.artwork,
                let img = art.image(at: CGSize(width: 96, height: 96)) {
                 Image(uiImage: img).resizable()
+            } else if song.remoteArtworkURL != nil {
+                RemoteThumb(url: song.remoteArtworkURL)
             } else {
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Theme.surface2)

@@ -20,10 +20,16 @@ struct MiniPlayerView: View {
                             .lineLimit(1)
                     }
                     Spacer()
-                    Button { player.toggle() } label: {
-                        Image(systemName: player.isPlaying ? "pause.fill" : "play.fill")
-                            .foregroundColor(Theme.coral)
+                    if player.buffering {
+                        ProgressView()
+                            .tint(Theme.coral)
                             .font(.title3)
+                    } else {
+                        Button { player.toggle() } label: {
+                            Image(systemName: player.isPlaying ? "pause.fill" : "play.fill")
+                                .foregroundColor(Theme.coral)
+                                .font(.title3)
+                        }
                     }
                 }
                 .padding(.horizontal)
@@ -56,6 +62,22 @@ struct NowPlayingView: View {
                             Text(song.artist)
                                 .foregroundColor(Theme.textDim)
                                 .lineLimit(1)
+                            if player.buffering {
+                                HStack(spacing: 8) {
+                                    ProgressView()
+                                        .tint(Theme.coral)
+                                        .scaleEffect(0.8)
+                                    Text("Loading stream…")
+                                        .foregroundColor(Theme.textDim)
+                                        .font(.caption)
+                                }
+                            } else if let err = player.bufferingError {
+                                Text(err)
+                                    .foregroundColor(Theme.coral)
+                                    .font(.caption)
+                                    .lineLimit(2)
+                                    .multilineTextAlignment(.center)
+                            }
                         }
 
                         VStack(spacing: 4) {
@@ -125,6 +147,9 @@ struct ArtworkLarge: View {
                let img = art.image(at: CGSize(width: 600, height: 600)) {
                 Image(uiImage: img)
                     .resizable()
+                    .aspectRatio(1, contentMode: .fit)
+            } else if song.remoteArtworkURL != nil {
+                RemoteThumb(url: song.remoteArtworkURL, size: 320, cornerRadius: 16)
                     .aspectRatio(1, contentMode: .fit)
             } else {
                 RoundedRectangle(cornerRadius: 16)
