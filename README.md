@@ -2,12 +2,15 @@
 
 Sonariq for iPhone — a native iOS music player built with Swift and SwiftUI.
 
-> **Status: foundation.** The native Swift/SwiftUI scaffold is in place and CI
-> builds it on every push (macOS runner, unsigned simulator build). Working
-> now: local library browsing, AVPlayer playback with background audio and
-> lock-screen controls, queue, synced-lyrics view (LRC parser included;
-> providers come next), 7-band EQ model with presets. Still to come: EQ engine
-> wiring, streaming sources, Listen Together, CarPlay, widgets.
+> **Status: building.** The native Swift/SwiftUI app is in place and CI builds
+> it on every push (macOS runner, unsigned simulator build). Working now:
+> local library browsing, AVAudioEngine playback (player → 7-band EQ → mixer,
+> so the EQ shapes the real output) with background audio and lock-screen
+> controls, queue, and a real lyrics engine: lrc.red (true Apple word timings)
+> and LRCLIB raced in parallel with a 12s timeout, word timings winning, disk
+> cache, and word-level highlighting that appears only when the provider truly
+> timed the words. Still to come: streaming sources, Listen Together, CarPlay,
+> widgets.
 
 ## v1.0 roadmap (first iPhone release)
 
