@@ -29,16 +29,22 @@ enum J {
 
     /// Last (largest) thumbnail URL under `thumbnail.musicThumbnailRenderer`.
     static func lastThumb(_ node: Any?) -> String? {
-        let thumbs = arr(dict(dict(dict(node)?["thumbnail"])?["musicThumbnailRenderer"])?["thumbnail"])?["thumbnails"])
-        return thumbs?.compactMap { str(dict($0)?["url"]) }.last
+        guard let thumbs = thumbList(node) else { return nil }
+        return thumbs.compactMap { str(dict($0)?["url"]) }.last
     }
 
     /// Last thumbnail's width/height, when present.
     static func lastThumbSize(_ node: Any?) -> (w: Double, h: Double)? {
-        let thumbs = arr(dict(dict(dict(node)?["thumbnail"])?["musicThumbnailRenderer"])?["thumbnail"])?["thumbnails"])
-        guard let last = dict(thumbs?.last),
+        guard let last = dict(thumbList(node)?.last),
               let w = dbl(last["width"]), let h = dbl(last["height"]), h > 0 else { return nil }
         return (w, h)
+    }
+
+    private static func thumbList(_ node: Any?) -> [Any]? {
+        guard let thumb = dict(node)?["thumbnail"],
+              let renderer = dict(thumb)?["musicThumbnailRenderer"],
+              let inner = dict(renderer)?["thumbnail"] else { return nil }
+        return arr(inner["thumbnails"])
     }
 
     /// Depth-first collection of every renderer object named `name`.
@@ -300,11 +306,16 @@ final class InnerTube {
     }
 
     private static func parseTrack(_ r: [String: Any]) -> ParsedTrack? {
-        let videoId = J.str(J.dict(r["playlistItemData"])?["videoId"])
-            ?? J.str(J.dict(J.dict(J.dict(J.dict(r["overlay"])?
-                ["musicItemThumbnailOverlayRenderer"])?["content"])?
-                ["musicPlayButtonRenderer"])?["playNavigationEndpoint"])?["watchEndpoint"])?["videoId"])
-            ?? ""
+        let overlayVideoId: String? = {
+            guard let overlay = J.dict(r["overlay"]),
+                  let tiro = J.dict(overlay["musicItemThumbnailOverlayRenderer"]),
+                  let content = J.dict(tiro["content"]),
+                  let playBtn = J.dict(content["musicPlayButtonRenderer"]),
+                  let playEp = J.dict(playBtn["playNavigationEndpoint"]),
+                  let watch = J.dict(playEp["watchEndpoint"]) else { return nil }
+            return J.str(watch["videoId"])
+        }()
+        let videoId = J.str(J.dict(r["playlistItemData"])?["videoId"]) ?? overlayVideoId ?? ""
         guard !videoId.isEmpty else { return nil }
         let columns = J.arr(r["flexColumns"])?.compactMap(J.dict) ?? []
         func columnText(_ i: Int) -> [String: Any]? {
@@ -352,9 +363,12 @@ final class InnerTube {
         guard !title.isEmpty else { return nil }
         let subtitle = columnText(1)
         if title.lowercased().contains("video") && subtitle.isEmpty { return nil }
-        let pageType = J.str(J.dict(J.dict(J.dict(
-            browse?["browseEndpointContextSupportedConfigs"])?
-            ["browseEndpointContextMusicConfig"])?["pageType"]))?.uppercased() ?? ""
+        let pageType: String = {
+            guard let browse,
+                  let configs = J.dict(browse["browseEndpointContextSupportedConfigs"]),
+                  let musicConfig = J.dict(configs["browseEndpointContextMusicConfig"]) else { return "" }
+            return (J.str(musicConfig["pageType"]) ?? "").uppercased()
+        }()
         let kind: BrowseItem.Kind
         if pageType.contains("ALBUM") { kind = .album }
         else if pageType.contains("ARTIST") { kind = .artist }
