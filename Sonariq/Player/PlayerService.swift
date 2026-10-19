@@ -12,7 +12,7 @@ final class PlayerService: ObservableObject {
     @Published private(set) var isPlaying = false
     @Published var progress: Double = 0
 
-    let equalizer = Equalizer()
+    @Published var equalizer = Equalizer()
 
     private let player = AVPlayer()
     private var timeObserver: Any?
