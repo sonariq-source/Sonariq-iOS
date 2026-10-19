@@ -93,7 +93,7 @@ struct NowPlayingView: View {
                         .foregroundColor(Theme.text)
 
                         NavigationLink {
-                            LyricsView(song: song)
+                            LyricsView()
                         } label: {
                             Label("Synced lyrics", systemImage: "text.quote")
                                 .foregroundColor(Theme.cyan)

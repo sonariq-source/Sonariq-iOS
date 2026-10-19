@@ -3,20 +3,31 @@ import AVFoundation
 import MediaPlayer
 import Combine
 
-/// Playback engine: AVPlayer queue, background audio, lock-screen / Control
-/// Center integration via MPNowPlayingInfoCenter + remote commands.
+/// Playback engine: an AVAudioEngine chain (player → 7-band EQ → mixer), so
+/// the equalizer shapes the real output rather than sitting beside it.
+/// Background audio, lock-screen / Control Center integration, and per-track
+/// lyrics fetching (word timings win when a provider truly has them).
 @MainActor
 final class PlayerService: ObservableObject {
     @Published private(set) var queue: [Song] = []
     @Published private(set) var currentIndex: Int?
     @Published private(set) var isPlaying = false
     @Published var progress: Double = 0
+    @Published private(set) var currentLyrics: [LyricsLine] = []
+    @Published private(set) var lyricsLoading = false
 
     @Published var equalizer = Equalizer()
 
-    private let player = AVPlayer()
-    private var timeObserver: Any?
+    private let engine = AVAudioEngine()
+    private let playerNode = AVAudioPlayerNode()
+    private var audioFile: AVAudioFile?
+    private var sampleRate: Double = 44_100
+    private var segmentOffsetSec: Double = 0
+    private var segmentStartSample: AVAudioFramePosition = 0
+    private var lastKnownProgress: Double = 0
+    private var progressTimer: Timer?
     private var cancellables = Set<AnyCancellable>()
+    private var lyricsTask: Task<Void, Never>?
 
     var currentSong: Song? {
         guard let i = currentIndex, queue.indices.contains(i) else { return nil }
@@ -24,20 +35,22 @@ final class PlayerService: ObservableObject {
     }
 
     init() {
-        timeObserver = player.addPeriodicTimeObserver(
-            forInterval: CMTime(seconds: 0.5, preferredTimescale: 600),
-            queue: .main
-        ) { [weak self] time in
-            Task { @MainActor in
-                self?.progress = time.seconds
-                self?.updateNowPlayingInfo()
-            }
+        engine.attach(playerNode)
+        engine.attach(equalizer.unit)
+
+        progressTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+            Task { @MainActor in self?.tick() }
         }
 
-        NotificationCenter.default.publisher(for: .AVPlayerItemDidPlayToEndTime)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                Task { @MainActor in self?.next() }
+        NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)
+            .sink { [weak self] note in
+                Task { @MainActor in self?.handleInterruption(note) }
+            }
+            .store(in: &cancellables)
+
+        NotificationCenter.default.publisher(for: AVAudioSession.routeChangeNotification)
+            .sink { [weak self] note in
+                Task { @MainActor in self?.handleRouteChange(note) }
             }
             .store(in: &cancellables)
 
@@ -64,13 +77,16 @@ final class PlayerService: ObservableObject {
 
     func resume() {
         guard currentSong != nil, !isPlaying else { return }
-        player.play()
+        if !engine.isRunning { try? engine.start() }
+        playerNode.play()
         isPlaying = true
         updateNowPlayingInfo()
     }
 
     func pause() {
-        player.pause()
+        progress = currentPositionSec()
+        lastKnownProgress = progress
+        playerNode.pause()
         isPlaying = false
         updateNowPlayingInfo()
     }
@@ -87,22 +103,123 @@ final class PlayerService: ObservableObject {
     }
 
     func seek(to seconds: Double) {
+        guard audioFile != nil else { return }
+        let frame = AVAudioFramePosition(max(0, seconds) * sampleRate)
+        scheduleSegment(fromFrame: frame, autoplay: isPlaying)
         progress = seconds
-        player.seek(to: CMTime(seconds: seconds, preferredTimescale: 600))
+        lastKnownProgress = seconds
         updateNowPlayingInfo()
     }
 
-    // MARK: - Private
+    // MARK: - Engine
 
-    private func playItem(at index: Int) {
-        guard queue.indices.contains(index),
-              let url = queue[index].assetURL else { return }
+    private func playItem(at index: Int, skipCount: Int = 0) {
+        guard queue.indices.contains(index), let url = queue[index].assetURL else { return }
+        guard let file = try? AVAudioFile(forReading: url) else {
+            // Unreadable (e.g. protected) — skip it rather than stalling the queue.
+            guard skipCount < queue.count else { return }
+            playItem(at: (index + 1) % queue.count, skipCount: skipCount + 1)
+            return
+        }
         currentIndex = index
         progress = 0
-        player.replaceCurrentItem(with: AVPlayerItem(url: url))
-        player.play()
+        lastKnownProgress = 0
+        audioFile = file
+        sampleRate = file.processingFormat.sampleRate
+        do {
+            engine.stop()
+            playerNode.stop()
+            engine.connect(playerNode, to: equalizer.unit, format: file.processingFormat)
+            engine.connect(equalizer.unit, to: engine.mainMixerNode, format: file.processingFormat)
+            try engine.start()
+        } catch {
+            print("Sonariq: engine start failed: \(error)")
+            return
+        }
+        scheduleSegment(fromFrame: 0, autoplay: true)
         isPlaying = true
         updateNowPlayingInfo()
+        loadLyrics(for: queue[index])
+    }
+
+    private func scheduleSegment(fromFrame frame: AVAudioFramePosition, autoplay: Bool) {
+        guard let file = audioFile else { return }
+        playerNode.stop()
+        let remaining = file.length - frame
+        guard remaining > 0 else { handleTrackEnd(); return }
+        segmentOffsetSec = Double(frame) / sampleRate
+        playerNode.scheduleSegment(file, startingFrame: frame,
+                                   frameCount: AVAudioFrameCount(remaining), at: nil) { [weak self] in
+            Task { @MainActor in self?.handleTrackEnd() }
+        }
+        if let nodeTime = playerNode.lastRenderTime,
+           let pt = playerNode.playerTime(forNodeTime: nodeTime) {
+            segmentStartSample = pt.sampleTime
+        }
+        if autoplay { playerNode.play() }
+        progress = segmentOffsetSec
+        lastKnownProgress = progress
+    }
+
+    private func handleTrackEnd() {
+        next()
+    }
+
+    private func tick() {
+        guard isPlaying else { return }
+        progress = currentPositionSec()
+        lastKnownProgress = progress
+        updateNowPlayingInfo()
+    }
+
+    /// Sample-accurate position from the render clock; falls back to the last
+    /// known value when the clock isn't available (e.g. right after a seek).
+    private func currentPositionSec() -> Double {
+        guard let nodeTime = playerNode.lastRenderTime,
+              let playerTime = playerNode.playerTime(forNodeTime: nodeTime),
+              playerTime.sampleRate > 0 else { return lastKnownProgress }
+        let elapsed = Double(playerTime.sampleTime - segmentStartSample) / playerTime.sampleRate
+        return max(0, segmentOffsetSec + elapsed)
+    }
+
+    // MARK: - Lyrics
+
+    private func loadLyrics(for song: Song) {
+        lyricsTask?.cancel()
+        currentLyrics = []
+        lyricsLoading = true
+        lyricsTask = Task {
+            let result = await LyricsEngine.fetch(for: song)
+            guard !Task.isCancelled else { return }
+            currentLyrics = result?.lines ?? []
+            lyricsLoading = false
+        }
+    }
+
+    // MARK: - System integration
+
+    private func handleInterruption(_ note: Notification) {
+        guard let info = note.userInfo,
+              let raw = info[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: raw) else { return }
+        switch type {
+        case .began:
+            pause()
+        case .ended:
+            let options = info[AVAudioSessionInterruptionOptionKey] as? UInt ?? 0
+            if AVAudioSession.InterruptionOptions(rawValue: options).contains(.shouldResume) {
+                resume()
+            }
+        @unknown default:
+            break
+        }
+    }
+
+    private func handleRouteChange(_ note: Notification) {
+        guard let info = note.userInfo,
+              let raw = info[AVAudioSessionRouteChangeReasonKey] as? UInt,
+              AVAudioSession.RouteChangeReason(rawValue: raw) == .oldDeviceUnavailable else { return }
+        pause() // Headphones unplugged.
     }
 
     private func setupRemoteCommands() {

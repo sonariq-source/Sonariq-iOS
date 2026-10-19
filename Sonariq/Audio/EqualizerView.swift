@@ -48,11 +48,6 @@ struct EqualizerView: View {
                     .padding(.top, 24)
 
                     Spacer()
-
-                    Text("Bands and presets drive a real AVAudioUnitEQ — engine wiring lands next.")
-                        .font(.footnote)
-                        .foregroundColor(Theme.textDim)
-                        .padding()
                 }
             }
             .navigationTitle("Equalizer")
