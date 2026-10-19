@@ -30,3 +30,44 @@ jobs:
           -derivedDataPath build
           CODE_SIGNING_ALLOWED=NO
           build
+
+  package-ipa:
+    # Unsigned IPA for sideloading (sign it yourself with SideStore, Feather,
+    # or any certificate signer — same flow as spoti.pw-style tweaks).
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          sudo xcode-select -s /Applications/Xcode.app
+          xcodebuild -version
+
+      - name: Prepare secrets (CI)
+        run: |
+          if [ ! -f Sonariq/Secrets.xcconfig ]; then
+            cp Sonariq/Secrets.xcconfig.example Sonariq/Secrets.xcconfig
+          fi
+
+      - name: Archive (device, unsigned)
+        run: >
+          xcodebuild archive
+          -project Sonariq.xcodeproj
+          -scheme Sonariq
+          -destination 'generic/platform=iOS'
+          -archivePath build/Sonariq.xcarchive
+          CODE_SIGNING_ALLOWED=NO
+          CODE_SIGNING_REQUIRED=NO
+
+      - name: Package unsigned IPA
+        run: |
+          mkdir -p ipa/Payload
+          cp -r build/Sonariq.xcarchive/Products/Applications/Sonariq.app ipa/Payload/
+          cd ipa && zip -r ../Sonariq-unsigned.ipa Payload >/dev/null && cd ..
+          ls -la Sonariq-unsigned.ipa
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Sonariq-unsigned.ipa
+          path: Sonariq-unsigned.ipa
+          if-no-files-found: error
